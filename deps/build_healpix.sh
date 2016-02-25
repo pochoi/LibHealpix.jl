@@ -17,7 +17,7 @@ gcc
 ar -rsv
 y
 
-
+/home/cpchoi/usr/local/lib
 
 y
 n
@@ -26,7 +26,7 @@ EOF
 
 bash ./configure -L << EOF
 4
-
+/home/cpchoi/usr/local/lib
 
 2
 n
