@@ -2,7 +2,7 @@
 
 HEALPIXDIR=downloads/Healpix_3.20
 
-cp config.gcc_with_fpic $HEALPIXDIR/src/cxx/config
+#cp config.gcc_with_fpic $HEALPIXDIR/src/cxx/config
 cd $HEALPIXDIR
 mkdir -p include
 mkdir -p lib
