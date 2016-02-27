@@ -1,11 +1,15 @@
 language: julia
+os:
+    - linux
+    - osx
 julia:
     - 0.4
     - nightly
 notifications:
     email: false
 before_install:
-    - sudo apt-get install libcfitsio3-dev -y
+    - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install libcfitsio3-dev -y; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install cfitsio; fi
 script:
     - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
     - julia --check-bounds=yes -e "Pkg.clone(pwd()); Pkg.build(\"LibHealpix\"); Pkg.test(\"LibHealpix\"; coverage=true)"
