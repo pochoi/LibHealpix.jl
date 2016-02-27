@@ -10,7 +10,7 @@ mkdir -p lib
 # patch the configure script to search the correct directory on Travis
 patch hpxconfig_functions.sh ../../hpxconfig_functions.patch
 
-bash ./configure -L << EOF
+bash ./configure -L
 2
 gcc-5
 -O2 -Wall
