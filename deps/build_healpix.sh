@@ -21,7 +21,7 @@ libcfitsio.a
 /usr/local/include
 y
 y
-4
+5
 /usr/local/lib
 /usr/local/include
 4
