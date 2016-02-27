@@ -11,6 +11,7 @@ before_install:
     - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install libcfitsio3-dev -y; fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gcc cfitsio; fi
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ln -s /usr/local/bin/gcc-4 /usr/local/bin/gcc; fi
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export PATH=/usr/local/bin:$PATH; fi
 script:
     - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
     - julia --check-bounds=yes -e "Pkg.clone(pwd()); Pkg.build(\"LibHealpix\"); Pkg.test(\"LibHealpix\"; coverage=true)"

@@ -28,7 +28,8 @@ importall Base.Operators
 import Base: length, pointer
 
 function __init__()
-    global const libchealpix = joinpath(dirname(@__FILE__),"../deps/downloads/Healpix_3.20/lib/libchealpix.dylib")
+    ext = @osx? "dylib" : "so"
+    global const libchealpix = joinpath(dirname(@__FILE__),"../deps/downloads/Healpix_3.20/lib/libchealpix.$ext")
     global const libhealpixwrapper = joinpath(dirname(@__FILE__),"../deps/libhealpixwrapper.so")
 end
 
