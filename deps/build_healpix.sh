@@ -20,15 +20,11 @@ libcfitsio.a
 /usr/local/lib
 /usr/local/include
 y
-0
-EOF
-
-bash ./configure -L << EOF
-5
+y
+4
 /usr/local/lib
 /usr/local/include
 4
-0
 EOF
 
 # patch the C Makefile to link libcfitsio into libchealpix
@@ -36,3 +32,4 @@ patch src/C/subs/Makefile ../../src_C_subs_Makefile.patch
 
 make c-all
 make cpp-all
+make test
