@@ -1,4 +1,4 @@
-CXX = g++
+CXX = g++-5
 CXXFLAGS = -c -Wall -Werror -fpic -Wno-unknown-pragmas
 
 HEALPIX = ../downloads/Healpix_3.20
@@ -25,4 +25,3 @@ clean:
 
 install:
 	cp libhealpixwrapper.so ..
-
