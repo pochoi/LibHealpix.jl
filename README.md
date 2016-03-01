@@ -22,7 +22,7 @@ using LibHealpix
 
 The build process will attempt to download and build the [Healpix](http://healpix.jpl.nasa.gov/) library.
 
-###### Issues of buidling in OSX
+###### Issues of building in OSX
 In OSX, by default, `gcc` and `g++` are linked to `clang`, which does not supported some of the flags used to build the [Healpix](http://healpix.jpl.nasa.gov/) library and wrappers in this package. To build this package in OSX, `gcc` and `g++` should be linked to GNU gcc/g++.
 
 ## Examples
