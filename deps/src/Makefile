@@ -2,7 +2,7 @@ HEALPIX = ../downloads/Healpix_3.20
 PKG_CONFIG_PATH = $(HEALPIX)/lib/pkgconfig
 
 CXX = g++
-CXXFLAGS = $(shell pkg-config --cflags --libs healpix_cxx)
+CXXFLAGS = $(shell pkg-config --cflags --libs $(HEALPIX)/lib/pkgconfig/healpix.pc)
 
 INCLUDES = -I$(HEALPIX)/src/cxx/Healpix_cxx -I$(HEALPIX)/src/cxx/cxxsupport
 LIBRARIES = -L$(HEALPIX)/lib -lhealpix_cxx -lcxxsupport -lsharp -lc_utils -lfftpack
