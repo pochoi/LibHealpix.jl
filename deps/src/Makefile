@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = $(pkg-config --cflags --libs healpix_cxx)
+CXXFLAGS = $(shell pkg-config --cflags --libs healpix_cxx)
 
 HEALPIX = ../downloads/Healpix_3.20
 INCLUDES = -I$(HEALPIX)/src/cxx/Healpix_cxx -I$(HEALPIX)/src/cxx/cxxsupport
