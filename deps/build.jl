@@ -29,6 +29,7 @@ function manually_build_healpix()
     run(`mkdir -p $dir`)
     run(`curl -o $(joinpath(dir, tar)) -L $url`)
     run(`tar -xzf $(joinpath(dir, tar)) -C $dir`)
+    println("Now at: ", pwd())
     run(`./build_healpix.sh`)
 end
 
@@ -57,7 +58,10 @@ end
 
 info("Building the HEALPix wrapper")
 depsdir = dirname(@__FILE__)
+println(readdir("$depsdir/usr/lib"))
 dir = joinpath(depsdir, "src")
+ENV["MY_PKG_CONFIG_PATH"] = joinpath(depsdir, "usr", "lib", "pkgconfig")
 run(`make -C $dir`)
 run(`make -C $dir install`)
+println(readdir("$depsdir/usr/lib"))
 
