@@ -68,4 +68,3 @@ imshow(img)
 ## Development
 This package is very much a work in progress. Only a small part of the Healpix library is currently wrapped.
 Please open issues or pull requests for missing functionality.
-
