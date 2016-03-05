@@ -1,4 +1,6 @@
 
+CFLAGS  := -c -Wall -Werror -fpic -Wno-unknown-pragmas
+
 UNAME := $(shell uname)
 ifeq ($(UNAME), Linux)
 SHARED_LIBRARY = libhealpixwrapper.so
@@ -13,13 +15,13 @@ PKG_CONFIG_LIBS   := $(shell pkg-config --libs   $(MY_PKG_CONFIG_PATH)/chealpix.
 all: $(SHARED_LIBRARY)
 
 map.o: map.cpp
-	$(CXX) $(PKG_CONFIG_CFLAGS) map.cpp
+	$(CXX) $(CFLAGS) $(PKG_CONFIG_CFLAGS) map.cpp
 
 alm.o: alm.cpp
-	$(CXX) $(PKG_CONFIG_CFLAGS) alm.cpp
+	$(CXX) $(CFLAGS) $(PKG_CONFIG_CFLAGS) alm.cpp
 
 transforms.o: transforms.cpp
-	$(CXX) $(PKG_CONFIG_CFLAGS) transforms.cpp
+	$(CXX) $(CFLAGS) $(PKG_CONFIG_CFLAGS) transforms.cpp
 
 $(SHARED_LIBRARY): map.o alm.o transforms.o
 	$(CXX) $(PKG_CONFIG_LIBS) -shared -o $(SHARED_LIBRARY) map.o alm.o transforms.o
