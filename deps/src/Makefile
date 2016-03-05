@@ -3,7 +3,7 @@ CFLAGS  := -c -Wall -Werror -fpic -Wno-unknown-pragmas
 PKG_CONFIG_CFLAGS := $(shell pkg-config --cflags $(MY_PKG_CONFIG_PATH)/chealpix.pc $(MY_PKG_CONFIG_PATH)/healpix_cxx.pc)
 PKG_CONFIG_LIBS   := $(shell pkg-config --libs   $(MY_PKG_CONFIG_PATH)/chealpix.pc $(MY_PKG_CONFIG_PATH)/healpix_cxx.pc)
 
-all: $(SHARED_LIBRARY)
+all: libhealpixwrapper.so
 
 map.o: map.cpp
 	$(CXX) $(CFLAGS) $(PKG_CONFIG_CFLAGS) map.cpp
@@ -19,9 +19,8 @@ $(SHARED_LIBRARY): map.o alm.o transforms.o
 
 clean:
 	-rm *.o
-	-rm $(SHARED_LIBRARY)
-
+	-rm libhealpixwrapper.so
 install:
 	@mkdir -p ../usr/lib
-	@cp $(SHARED_LIBRARY) ../usr/lib
+	@cp libhealpixwrapper.so ../usr/lib
 
