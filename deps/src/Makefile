@@ -9,9 +9,9 @@ ifeq ($(UNAME), Darwin)
 SHARED_LIBRARY = libhealpixwrapper.dylib
 endif
 
-MY_PKG_CONFIG_PATH := $(PWD)/../usr/lib/pkgconfig:$(PKG_CONFIG_PATH)
-PKG_CONFIG_CFLAGS := $(shell PKG_CONFIG_PATH=$(MY_PKG_CONFIG_PATH) pkg-config --cflags chealpix healpix_cxx)
-PKG_CONFIG_LIBS   := $(shell PKG_CONFIG_PATH=$(MY_PKG_CONFIG_PATH) pkg-config --libs   chealpix healpix_cxx)
+MY_PKG_CONFIG_PATH := $(PWD)/../usr/lib/pkgconfig/
+PKG_CONFIG_CFLAGS := $(shell PKG_CONFIG_PATH=$(MY_PKG_CONFIG_PATH) pkg-config --cflags $(MY_PKG_CONFIG_PATH)chealpix.pc $(MY_PKG_CONFIG_PATH)healpix_cxx.pc)
+PKG_CONFIG_LIBS   := $(shell PKG_CONFIG_PATH=$(MY_PKG_CONFIG_PATH) pkg-config --libs   $(MY_PKG_CONFIG_PATH)chealpix.pc $(MY_PKG_CONFIG_PATH)healpix_cxx.pc)
 
 all: $(SHARED_LIBRARY)
 
