@@ -60,6 +60,7 @@ info("Building the HEALPix wrapper")
 depsdir = dirname(@__FILE__)
 println(readdir("$depsdir/usr/lib"))
 dir = joinpath(depsdir, "src")
+ENV["MY_PKG_CONFIG_PATH"] = joinpath(depsdir, "usr", "lib", "pkgconfig")
 run(`make -C $dir`)
 run(`make -C $dir install`)
 
