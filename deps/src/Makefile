@@ -1,13 +1,5 @@
 CFLAGS  := -c -Wall -Werror -fpic -Wno-unknown-pragmas
 
-UNAME := $(shell uname)
-ifeq ($(UNAME), Linux)
-SHARED_LIBRARY = libhealpixwrapper.so
-endif
-ifeq ($(UNAME), Darwin)
-SHARED_LIBRARY = libhealpixwrapper.dylib
-endif
-
 PKG_CONFIG_CFLAGS := $(shell pkg-config --cflags $(MY_PKG_CONFIG_PATH)/chealpix.pc $(MY_PKG_CONFIG_PATH)/healpix_cxx.pc)
 PKG_CONFIG_LIBS   := $(shell pkg-config --libs   $(MY_PKG_CONFIG_PATH)/chealpix.pc $(MY_PKG_CONFIG_PATH)/healpix_cxx.pc)
 
@@ -23,7 +15,7 @@ transforms.o: transforms.cpp
 	$(CXX) $(CFLAGS) $(PKG_CONFIG_CFLAGS) transforms.cpp
 
 $(SHARED_LIBRARY): map.o alm.o transforms.o
-	$(CXX) $(PKG_CONFIG_LIBS) -shared -o $(SHARED_LIBRARY) map.o alm.o transforms.o
+	$(CXX) $(PKG_CONFIG_LIBS) -shared -o libhealpixwrapper.so map.o alm.o transforms.o
 
 clean:
 	-rm *.o
