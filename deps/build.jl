@@ -58,7 +58,7 @@ end
 
 info("Building the HEALPix wrapper")
 depsdir = dirname(@__FILE__)
-readdir("$depsdir/usr/lib")
+println(readdir("$depsdir/usr/lib"))
 dir = joinpath(depsdir, "src")
 run(`make -C $dir`)
 run(`make -C $dir install`)
