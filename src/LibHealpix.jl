@@ -28,8 +28,15 @@ importall Base.Operators
 import Base: length, pointer
 
 function __init__()
-    global const libchealpix = joinpath(dirname(@__FILE__), "../deps/usr/lib/libchealpix")
-    global const libhealpixwrapper = joinpath(dirname(@__FILE__), "../deps/usr/lib/libhealpixwrapper")
+    if OS_NAME === :Darwin
+        const dlext = "dylib"
+    else
+        #assume OS_NAME === :Linux, or similar
+        const dlext = "so"
+    end
+                    
+    global const libchealpix = joinpath(dirname(@__FILE__), "../deps/usr/lib/libchealpix.$dlext")
+    global const libhealpixwrapper = joinpath(dirname(@__FILE__), "../deps/usr/lib/libhealpixwrapper.$dlext")
 end
 
 const UNDEF = -1.6375e30 # Defined by the Healpix standard
