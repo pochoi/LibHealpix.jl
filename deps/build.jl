@@ -1,4 +1,5 @@
 using BinDeps
+using Sys
 
 BinDeps.@setup
 
@@ -16,7 +17,7 @@ catch
     false
 end
 
-has_libtool = if is_linux()
+has_libtool = if Sys.islinux()
     # TODO: a more thorough search for libtool.m4?
     isfile("/usr/share/aclocal/libtool.m4") || isfile("/usr/local/share/aclocal/libtool.m4")
 else
@@ -27,10 +28,10 @@ provides(AptGet, Dict("libcfitsio3-dev"    => libcfitsio,
                       "libchealpix-dev"    => libchealpix,     # Xenial and later only
                       "libhealpix-cxx-dev" => libhealpix_cxx)) # Xenial and later only
 
-if is_apple()
+if Sys.isapple()
     using Homebrew
     provides(Homebrew.HB, "cfitsio", libcfitsio, os=:Darwin)
-    provides(Homebrew.HB, "homebrew/science/healpix", [libchealpix, libhealpix_cxx], os=:Darwin)
+    provides(Homebrew.HB, "healpix", [libchealpix, libhealpix_cxx], os=:Darwin)
     if !has_pkg_config
         Homebrew.add("pkg-config")
         has_pkg_config = true
@@ -139,7 +140,7 @@ if Sys.ARCH == :x86_64
 end
 
 # https://github.com/JuliaLang/BinDeps.jl/pull/163
-is_linux() && push!(BinDeps.defaults, BinDeps.Binaries)
+Sys.isapple() && push!(BinDeps.defaults, BinDeps.Binaries)
 try
     BinDeps.@install Dict(:libchealpix => :libchealpix, :libhealpixwrapper => :libhealpixwrapper)
 finally
