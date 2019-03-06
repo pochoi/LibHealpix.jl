@@ -1,4 +1,4 @@
-# Copyright (c) 2015 Michael Eastwood
+# Copyright (c) 2015-2017 Michael Eastwood
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,28 +17,60 @@ __precompile__()
 
 module LibHealpix
 
-export HealpixMap, pixels, nside, npix, nring, isring, isnest
-export Alm, coefficients, lmax, mmax
-export npix2nside, nside2npix
+export LibHealpixException
+
+# pixel.jl
+export nside2npix, npix2nside, nside2nring
+export ang2vec, vec2ang
+export nest2ring, ring2nest
+export ang2pix_nest, ang2pix_ring, pix2ang_nest, pix2ang_ring
+export vec2pix_nest, vec2pix_ring, pix2vec_nest, pix2vec_ring
+
+# map.jl
+export HealpixMap, RingHealpixMap, NestHealpixMap
+export ang2pix, pix2ang, vec2pix, pix2vec
+export isring, isnest
+export query_disc
+
+# alm.jl
+export Alm, @lm, lm
+
+# transforms.jl
 export map2alm, alm2map
-export writehealpix, readhealpix
+
+# projections.jl
 export mollweide
 
-importall Base.Operators
-import Base: length, pointer
+# io.jl
+export writehealpix, readhealpix
 
-function __init__()
-    global const libchealpix = joinpath(dirname(@__FILE__),"../deps/downloads/Healpix_3.20/lib/libchealpix.so")
-    global const libhealpixwrapper = joinpath(dirname(@__FILE__),"../deps/libhealpixwrapper.so")
+using StaticArrays
+using FITSIO.Libcfitsio
+using MacroTools # needed for @lm
+
+if isfile(joinpath(dirname(@__FILE__),"..","deps","deps.jl"))
+    include("../deps/deps.jl")
+else
+    error("LibHealpix is not properly installed. Please run Pkg.build(\"LibHealpix\")")
 end
 
-const UNDEF = -1.6375e30 # Defined by the Healpix standard
+struct LibHealpixException <: Exception
+    message :: String
+end
+
+err(message) = throw(LibHealpixException(message))
+
+function Base.show(io::IO, exception::LibHealpixException)
+    print(io, "LibHealpixException: ", exception.message)
+end
 
 include("pixel.jl")
+include("rings.jl")
 include("map.jl")
 include("alm.jl")
 include("transforms.jl")
-include("mollweide.jl")
+include("projections.jl")
+include("io.jl")
 
 end
 

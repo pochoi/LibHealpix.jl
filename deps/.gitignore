@@ -1,3 +1,10 @@
 *.o
 *.so
-downloads/*
+*.dylib
+downloads/
+!src/
+src/*
+!src/wrapper
+builds/
+usr/
+deps.jl
