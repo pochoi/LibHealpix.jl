@@ -1,5 +1,4 @@
 using BinDeps
-using Sys
 
 BinDeps.@setup
 
