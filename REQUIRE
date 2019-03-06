@@ -1,4 +1,4 @@
-julia 0.6
+julia 0.7-1.1
 BinDeps
 FITSIO 0.10.0
 MacroTools
