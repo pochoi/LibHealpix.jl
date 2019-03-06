@@ -57,7 +57,7 @@ cplus_include_path = headers ⊕ get(ENV, "CPLUS_INCLUDE_PATH", "")
 ld_library_path = libs ⊕  get(ENV, "LD_LIBRARY_PATH", "")
 pkg_config_path = joinpath(libs, "pkgconfig") ⊕ get(ENV, "PKG_CONFIG_PATH", "")
 
-if is_apple()
+if Sys.isapple()
     pkg_config_path = joinpath(Homebrew.prefix(), "lib", "pkgconfig") ⊕ pkg_config_path
 end
 
@@ -144,6 +144,6 @@ Sys.isapple() && push!(BinDeps.defaults, BinDeps.Binaries)
 try
     BinDeps.@install Dict(:libchealpix => :libchealpix, :libhealpixwrapper => :libhealpixwrapper)
 finally
-    is_linux() && pop!(BinDeps.defaults)
+    Sys.islinux() && pop!(BinDeps.defaults)
 end
 
